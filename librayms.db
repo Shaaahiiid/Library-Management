@@ -1,0 +1,70 @@
+CREATE TABLE `books` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `isbn` varchar(13) NOT NULL,
+  `published_year` int(11) NOT NULL,
+  `image_url` varchar(255) NOT NULL,
+  `available_copies` int(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `isbn` (`isbn`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=22;
+
+INSERT INTO `books` (`id`, `title`, `author`, `isbn`, `published_year`, `image_url`, `available_copies`) VALUES
+(1, 'The Hitchhiker\'s Guide to the Galaxy', 'Douglas Adams', '0-345-39180-2', 1979, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1586548540i/386162.jpg', 1),
+(2, 'Dune', 'Frank Herbert', '0-441-17271-7', 1965, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1589134015i/44767458.jpg', 1),
+(3, 'Project Hail Mary', 'Andy Weir', '0-593-13490-3', 2021, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1601618386i/54493401.jpg', 1),
+(4, 'The Martian', 'Andy Weir', '0-553-41802-5', 2011, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1559483320i/18066538.jpg', 1),
+(5, 'The Lord of the Rings', 'J.R.R. Tolkien', '0-618-05116-1', 1954, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg', 0),
+(6, 'A Game of Thrones', 'George R.R. Martin', '0-553-59371-4', 1996, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1436732693i/13496.jpg', 1),
+(7, 'The Chronicles of Narnia', 'C.S. Lewis', '0-06-440499-1', 1950, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1352467265i/11127.jpg', 1),
+(8, 'Harry Potter and the Sorcerer\'s Stone', 'J.K. Rowling', '0-590-35340-3', 1997, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1474154022i/3.jpg', 1),
+(9, 'The Hunger Games', 'Suzanne Collins', '0-439-02348-3', 2008, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1586722975i/2767052.jpg', 1),
+(10, 'To Kill a Mockingbird', 'Harper Lee', '0-446-31078-6', 1960, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1553383690i/2657.jpg', 1),
+(11, 'Pride and Prejudice', 'Jane Austen', '0-679-40542-8', 1813, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1320399351i/184428.jpg', 1),
+(12, '1984', 'George Orwell', '0-452-28423-6', 1949, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1532714506i/40961427.jpg', 1),
+(13, 'Brave New World', 'Aldous Huxley', '0-06-085052-3', 1932, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1575512969i/5129.jpg', 1),
+(14, 'The Great Gatsby', 'F. Scott Fitzgerald', '0-7432-7356-7', 1925, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1490528560i/4671.jpg', 1),
+(15, 'Moby-Dick', 'Herman Melville', '0-14-243724-4', 1851, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1327940733i/15372.jpg', 1),
+(16, 'The Catcher in the Rye', 'J.D. Salinger', '0-316-76948-7', 1951, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1398034300i/5107.jpg', 1),
+(17, 'One Hundred Years of Solitude', 'Gabriel García Márquez', '0-06-112008-1', 1967, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1579568916i/320.jpg', 1),
+(18, 'The Alchemist', 'Paulo Coelho', '0-06-112241-6', 1988, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1654522851i/865.jpg', 1),
+(19, 'The Hobbit', 'J.R.R. Tolkien', '0-618-05116-4', 1937, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071217i/5907.jpg', 1),
+(20, 'Frankenstein', 'Mary Shelley', '0-486-28211-2', 1818, 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1672323381i/18490.jpg', 1),
+(21, 'okio,', 'l,l,l', 'jbh79', 2008, 'https://grok.com/c', 1);
+
+CREATE TABLE `borrowings` (
+  `borrow_id` int(11) NOT NULL,
+  `book_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `borrow_date` date NOT NULL,
+  `return_date` date DEFAULT NULL,
+  PRIMARY KEY (`borrow_id`),
+  KEY `book_id` (`book_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=7;
+
+INSERT INTO `borrowings` (`borrow_id`, `book_id`, `user_id`, `borrow_date`, `return_date`) VALUES
+(1, 9, 2, '2025-09-03', '2025-09-03'),
+(2, 5, 2, '2025-09-03', NULL),
+(3, 11, 2, '2025-09-03', '2025-09-03'),
+(4, 6, 2, '2025-09-03', '2025-09-03'),
+(5, 6, 2, '2025-09-03', '2025-09-03'),
+(6, 12, 2, '2025-09-03', '2025-09-03');
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('admin','user') NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AUTO_INCREMENT=3;
+
+INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
+(1, 'admin', 'admin123', 'admin'),
+(2, 'user', 'user123', 'user');
+
+ALTER TABLE `borrowings`
+  ADD CONSTRAINT `borrowings_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`),
+  ADD CONSTRAINT `borrowings_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);

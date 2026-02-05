@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Library System</h2>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="#" data-view="dashboard" class="nav-link active">📊 Dashboard</a></li>
+                <li><a href="#" data-view="books" class="nav-link">📚 Books</a></li>
+                <li><a href="#" data-view="users" class="nav-link">👥 Users</a></li>
+                <li><a href="#" data-view="borrowing" class="nav-link">📋 Borrowing</a></li>
+                <li><a href="#" data-view="reports" class="nav-link">📈 Reports</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="view active">
+                <div class="view-header">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Books</h3>
+                        <p class="stat-number" id="total-books">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Available Books</h3>
+                        <p class="stat-number" id="available-books">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Borrowed Books</h3>
+                        <p class="stat-number" id="borrowed-books">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <p class="stat-number" id="total-users">0</p>
+                    </div>
+                </div>
+                <div class="recent-transactions">
+                    <h2>Recent Transactions</h2>
+                    <div class="transactions-list" id="recent-transactions"></div>
+                </div>
+            </div>
+
+            <!-- Books View -->
+            <div id="books-view" class="view">
+                <div class="view-header">
+                    <h1>Books Management</h1>
+                    <div class="header-actions">
+                        <input type="text" class="form-control" id="books-search" placeholder="Search books...">
+                        <button class="btn btn--primary" id="add-book-btn">Add Book</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ISBN</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Genre</th>
+                                <th>Year</th>
+                                <th>Copies</th>
+                                <th>Available</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="books-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Users View -->
+            <div id="users-view" class="view">
+                <div class="view-header">
+                    <h1>Users Management</h1>
+                    <div class="header-actions">
+                        <input type="text" class="form-control" id="users-search" placeholder="Search users...">
+                        <button class="btn btn--primary" id="add-user-btn">Add User</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Membership Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Borrowing View -->
+            <div id="borrowing-view" class="view">
+                <div class="view-header">
+                    <h1>Borrowing & Returns</h1>
+                    <div class="header-actions">
+                        <button class="btn btn--primary" id="borrow-book-btn">Borrow Book</button>
+                        <button class="btn btn--secondary" id="return-book-btn">Return Book</button>
+                    </div>
+                </div>
+                <div class="borrowing-sections">
+                    <div class="section">
+                        <h2>Current Borrowings</h2>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Book</th>
+                                        <th>Borrow Date</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                        <th>Fine</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="borrowings-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports View -->
+            <div id="reports-view" class="view">
+                <div class="view-header">
+                    <h1>Search & Reports</h1>
+                </div>
+                <div class="reports-sections">
+                    <div class="section">
+                        <h2>Advanced Search</h2>
+                        <div class="search-filters">
+                            <input type="text" class="form-control" id="advanced-search" placeholder="Search across all records...">
+                            <select class="form-control" id="search-filter">
+                                <option value="all">All Categories</option>
+                                <option value="books">Books Only</option>
+                                <option value="users">Users Only</option>
+                                <option value="transactions">Transactions Only</option>
+                            </select>
+                        </div>
+                        <div id="search-results"></div>
+                    </div>
+                    <div class="section">
+                        <h2>Reports</h2>
+                        <div class="reports-grid">
+                            <div class="report-card">
+                                <h3>Overdue Books</h3>
+                                <p class="report-number" id="overdue-count">0</p>
+                            </div>
+                            <div class="report-card">
+                                <h3>Most Borrowed</h3>
+                                <p class="report-text" id="most-borrowed">-</p>
+                            </div>
+                            <div class="report-card">
+                                <h3>Active Users</h3>
+                                <p class="report-number" id="active-users">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Book Modal -->
+    <div class="modal hidden" id="book-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="book-modal-title">Add Book</h2>
+                <button class="modal-close" id="book-modal-close">&times;</button>
+            </div>
+            <form id="book-form">
+                <div class="form-group">
+                    <label class="form-label">ISBN</label>
+                    <input type="text" class="form-control" id="book-isbn" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" id="book-title" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Author</label>
+                    <input type="text" class="form-control" id="book-author" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Genre</label>
+                    <input type="text" class="form-control" id="book-genre" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Publication Year</label>
+                    <input type="number" class="form-control" id="book-year" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Total Copies</label>
+                    <input type="number" class="form-control" id="book-copies" min="1" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn--secondary" id="book-cancel">Cancel</button>
+                    <button type="submit" class="btn btn--primary">Save Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Modal -->
+    <div class="modal hidden" id="user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="user-modal-title">Add User</h2>
+                <button class="modal-close" id="user-modal-close">&times;</button>
+            </div>
+            <form id="user-form">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" id="user-name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="user-email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-control" id="user-phone" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn--secondary" id="user-cancel">Cancel</button>
+                    <button type="submit" class="btn btn--primary">Save User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Borrow Modal -->
+    <div class="modal hidden" id="borrow-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Borrow Book</h2>
+                <button class="modal-close" id="borrow-modal-close">&times;</button>
+            </div>
+            <form id="borrow-form">
+                <div class="form-group">
+                    <label class="form-label">Select User</label>
+                    <select class="form-control" id="borrow-user" required>
+                        <option value="">Choose user...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Select Book</label>
+                    <select class="form-control" id="borrow-book" required>
+                        <option value="">Choose book...</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn--secondary" id="borrow-cancel">Cancel</button>
+                    <button type="submit" class="btn btn--primary">Borrow Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Return Modal -->
+    <div class="modal hidden" id="return-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Return Book</h2>
+                <button class="modal-close" id="return-modal-close">&times;</button>
+            </div>
+            <form id="return-form">
+                <div class="form-group">
+                    <label class="form-label">Select Borrowed Book</label>
+                    <select class="form-control" id="return-transaction" required>
+                        <option value="">Choose transaction...</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn--secondary" id="return-cancel">Cancel</button>
+                    <button type="submit" class="btn btn--primary">Return Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal hidden" id="confirm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirm Action</h2>
+                <button class="modal-close" id="confirm-modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">Are you sure you want to perform this action?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn--secondary" id="confirm-cancel">Cancel</button>
+                <button type="button" class="btn btn--primary" id="confirm-ok">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification hidden">
+        <span id="notification-message"></span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
