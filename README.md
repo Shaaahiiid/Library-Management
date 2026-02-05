@@ -33,7 +33,3 @@ The design is clean and beginner-friendly and supports both Light Mode and Dark 
 
 No frameworks used. Everything is built from scratch for learning purposes.
 
----
-
-## 📂 Project Structure
-
