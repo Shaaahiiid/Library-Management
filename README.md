@@ -1,35 +1,144 @@
-# Library-Management
+# 📚 Library Management System (DBMS Project)
 
-# 📚 Library Management System (Frontend)
+A **Library Management System** built using **HTML, CSS, JavaScript, and SQLite** that demonstrates core **Database Management System (DBMS)** concepts with a functional web interface.
 
-This is a simple Library Management System UI made using **HTML, CSS, and JavaScript**.
+This project allows management of:
 
-I created this project to practice frontend development and understand how real-world dashboard layouts work like sidebar navigation, tables, forms, modals, and theme switching.
+- 📚 Books
+- 👥 Users
+- 🔁 Borrowing & Returns
+- 📊 Reports & Search
 
-The design is clean and beginner-friendly and supports both Light Mode and Dark Mode.
+It combines **frontend development + relational database design** for a complete academic and portfolio-ready system.
 
 ---
 
 ## 🚀 Features
 
-- Sidebar navigation
-- Dashboard with statistics
-- Books & users table
-- Add / Edit / Delete actions
-- Borrow & return status
-- Status badges (Available, Borrowed, Overdue)
-- Modal popup forms
-- Notifications
-- Light / Dark theme
-- Responsive design (mobile + desktop)
+### 📊 Dashboard
+- Total books
+- Available books
+- Borrowed books
+- Active users
+- Recent transactions
+
+### 📚 Books Management
+- Add / Edit / Delete books
+- Track availability
+- Search by title, author, genre, ISBN
+
+### 👥 Users Management
+- Add / Edit / Delete users
+- Active/Inactive status
+- Email & phone tracking
+
+### 🔁 Borrowing System
+- Borrow books
+- Return books
+- 14-day due date
+- Automatic overdue detection
+- Fine calculation ($0.50/day)
+
+### 📈 Reports & Search
+- Overdue books count
+- Most borrowed book
+- Active users count
+- Global advanced search
 
 ---
 
-## 🛠 Technologies Used
+## 🛠 Tech Stack
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla JS)
+| Layer | Technology |
+|---------|-------------|
+| Frontend | HTML, CSS, JavaScript (Vanilla) |
+| Database | SQLite |
+| Server | Live Server |
+| Architecture | Client-side + Relational DB |
 
-No frameworks used. Everything is built from scratch for learning purposes.
+---
+
+---
+
+## 🗄️ Database Design
+
+The system uses an **SQLite database (`librayms.db`)** to store persistent data.
+
+### 📘 Books Table
+| Field | Type |
+|-----------|----------|
+| id (PK) | TEXT |
+| isbn | TEXT |
+| title | TEXT |
+| author | TEXT |
+| genre | TEXT |
+| publicationYear | INTEGER |
+| totalCopies | INTEGER |
+| availableCopies | INTEGER |
+
+---
+
+### 👤 Users Table
+| Field | Type |
+|-----------|----------|
+| id (PK) | TEXT |
+| name | TEXT |
+| email | TEXT |
+| phone | TEXT |
+| membershipDate | DATE |
+| isActive | BOOLEAN |
+
+---
+
+### 🔁 Transactions Table
+| Field | Type |
+|-----------|----------|
+| id (PK) | TEXT |
+| userId (FK) | TEXT |
+| bookId (FK) | TEXT |
+| borrowDate | DATE |
+| dueDate | DATE |
+| returnDate | DATE |
+| status | TEXT |
+| fineAmount | REAL |
+
+---
+
+## 🔗 Relationships
+
+- One User → Many Transactions  
+- One Book → Many Transactions  
+- Foreign keys maintain data integrity  
+
+---
+
+## 🧠 DBMS Concepts Implemented
+
+- Relational database design  
+- Primary & Foreign keys  
+- Normalization  
+- CRUD operations  
+- Data consistency  
+- Transaction tracking  
+- Search queries  
+- Reports generation  
+
+---
+
+## 🎯 Learning Outcomes
+
+- DOM manipulation
+- JavaScript OOP
+- CRUD logic
+- Database design
+- Search/filter algorithms
+- DBMS implementation
+
+---
+
+## 👨‍💻 Author
+
+**Shahid Rashid Shaikh**  
+SY B.Tech – CSE (Artificial Intelligence)
+
 
